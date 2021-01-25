@@ -33,7 +33,7 @@ class App extends React.Component {
     // eslint-disable-next-line no-unused-vars
     const { location, HostInfo, ToKnow } = this.state;
     return (
-      <div>
+      <div className="host-info-body">
         <Location location={location} />
         <Host host={HostInfo} />
         <Know toKnow={ToKnow} />

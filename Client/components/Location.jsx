@@ -26,7 +26,7 @@ const Location = ({ location }) => {
   return (
     <div>
       <hr />
-      <h4 className='loc-title'>Location</h4>
+      <h2>Location</h2>
       <div id='wrapper'>
         {!isShown && <div id='map' />}
         <div className='loc-notice'>Exact location provided after booking</div>
