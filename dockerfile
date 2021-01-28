@@ -1,6 +1,6 @@
-FROM node:12-alpine
+FROM node:15.7.0
  WORKDIR /FEC
  RUN npm install
  COPY . .
- ENV MONGODBURL='mongodb://mongodb:27017/fec'
+ ENV MONGODBURL='mongodb://database:27017/fec'
  CMD ["node", "Server/index.js"]
