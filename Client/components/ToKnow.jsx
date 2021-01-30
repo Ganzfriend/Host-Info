@@ -1,14 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Health from './Health.jsx';
 import Rules from './Rules.jsx';
 import ToKnowModal from './ToKnowModal.jsx';
 
-const ToKnow = ({ toKnow }) => {
+const ToKnow = () => {
   const [showRules, setRules] = useState(false);
   const [showSafety, setSafety] = useState(false);
   const [showCancel, setCancel] = useState(false);
+
+  const [toKnow, setToKnow] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(`http://54.67.25.138:3001/toKnow/${id}`)
+      .then(({ data }) => {
+        setToKnow(data);
+      })
+      .catch((err) => console.log(err));
+  });
 
   const { rules, health, cancelPolicy } = toKnow;
   const healthTitle = 'Health & safety';

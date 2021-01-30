@@ -7,7 +7,9 @@ import 'jsdom-global/register';
 import React from 'react';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { shallow, configure, mount } from 'enzyme';
+import {
+  shallow, configure, mount, render,
+} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import App from '../Client/components/app.jsx';
 import Location from '../Client/components/Location.jsx';
@@ -71,55 +73,58 @@ describe('Basic app functionality', () => {
       done();
     });
 
-    it('should call componentDidMount and update the state', (done) => {
-      expect(instance.componentDidMount).toHaveBeenCalledTimes(1);
-      location = instance.state.location;
-      hostInfo = instance.state.HostInfo;
-      toknow = instance.state.ToKnow;
+    // it('should call componentDidMount and update the state', (done) => {
+    //   expect(instance.componentDidMount).toHaveBeenCalledTimes(1);
+    //   location = instance.state.location;
+    //   hostInfo = instance.state.HostInfo;
+    //   toknow = instance.state.ToKnow;
 
-      expect(location).toMatchObject(locations);
-      expect(hostInfo).toMatchObject(hosts);
-      expect(toknow).toMatchObject(toKnow);
+    //   expect(location).toMatchObject(locations);
+    //   expect(hostInfo).toMatchObject(hosts);
+    //   expect(toknow).toMatchObject(toKnow);
+    //   done();
+    // });
+
+    it('should not pass down props to Location component', (done) => {
+      expect(wrapper.find('Location').props()).toEqual({});
       done();
     });
 
-    it('should pass down updated location to Location component', (done) => {
-      expect(wrapper.find('Location').props()).not.toBeNull();
-      expect(wrapper.find('Location').props().location).toMatchObject(locations);
+    it('should not pass down props to HostInfo component', (done) => {
+      expect(wrapper.find('HostInfo').props()).toEqual({});
       done();
     });
 
-    it('should pass down updated hostInfo to HostInfo component', (done) => {
-      expect(wrapper.find('HostInfo').props()).not.toBeNull();
-      expect(wrapper.find('HostInfo').props().host).toMatchObject(hosts);
-      done();
-    });
-
-    it('should pass down updated toKnow to ToKnow component', (done) => {
-      expect(wrapper.find('ToKnow').props()).not.toBeNull();
-      expect(wrapper.find('ToKnow').props().toKnow).toMatchObject(toKnow);
+    it('should not pass down props to ToKnow component', (done) => {
+      expect(wrapper.find('ToKnow').props()).toEqual({});
       done();
     });
   });
 });
 
 describe('Location component functionality', () => {
+  const app = render(<App getData={getData} />);
+  jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useParams: () => ({
+      house: 'Modal-H-is-for-house',
+    }),
+    useRouteMatch: () => ({ url: '/listing/Model-H-is-for-house' }),
+  }));
+
   it('should only show a preview of the location', (done) => {
-    const locComp = shallow(<Location location={locations} />);
-    expect(locComp.find('#desc-prev').text().length).toBeLessThan(locations.desc.length);
+    expect(app.find('#desc-prev').text().length).toBeLessThan(locations.desc.length);
     done();
   });
 
   it('should show not the Map Modal on load in', (done) => {
-    const locComp = shallow(<Location location={locations} />);
-    expect(locComp.find(Modal).prop('show')).toBe(false);
+    expect(app.find(Modal).length).toBe(0);
     done();
   });
 
   it('should show the Map Modal when More about location is clicked', (done) => {
-    const locComp = shallow(<Location location={locations} />);
-    locComp.find('#open-loc-modal').simulate('click');
-    expect(locComp.find(Modal).prop('show')).toBe(true);
+    console.log(app.find('#open-loc-modal'));
+    expect(app.find(Modal).prop('show')).toBe(true);
     done();
   });
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Moment from 'moment';
 import StarIcon from '@material-ui/icons/Star';
@@ -7,8 +7,9 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import SecurityIcon from '@material-ui/icons/Security';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
-const HostInfo = ({ host }) => {
+const HostInfo = () => {
   const [showMore, setShow] = useState(false);
   const [showModal, setModal] = useState(false);
   const [msgName, setName] = useState('');
@@ -16,6 +17,17 @@ const HostInfo = ({ host }) => {
   const [msgTopic, setTopic] = useState('');
   const [msgBody, setBody] = useState('');
   const [valid, setValid] = useState('');
+
+  const [host, setHost] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(`http://54.67.25.138:3001/hostInfo/${id}`)
+      .then(({ data }) => {
+        setHost(data);
+      })
+      .catch((err) => console.log(err));
+  });
 
   const {
     name, desc, photo, joinDate, verified, reviews, response, _id,
@@ -48,7 +60,7 @@ const HostInfo = ({ host }) => {
         topic: msgTopic,
         message: msgBody,
       };
-      axios.put(`/email/${_id}`, body)
+      axios.put(`http://54.67.25.138:3001/email/${_id}`, body)
         .then((res) => {
           console.log(res);
           resetState();

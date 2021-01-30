@@ -15,29 +15,27 @@ app.get('/static', (req, res) => {
   res.sendFile(path.join(__dirname, 'Public', 'bundle.js'));
 });
 
-app.get('/hostInfo/:name', async (req, res) => {
+app.get('/hostInfo/:id', async (req, res) => {
   try {
-    const name = req.params.name.replace(/-/g, ' ');
-    const data = await Hosts.findOne({ name }).exec();
+    const data = await Hosts.findOne({ properties: req.params.id }).exec();
     res.status(200).send(data);
   } catch (err) {
     res.status(404).send(err);
   }
 });
 
-app.get('/location/:city', async (req, res) => {
+app.get('/location/:id', async (req, res) => {
   try {
-    const data = await Locations.findOne(req.params).exec();
+    const data = await Locations.findOne({ properties: req.params.id }).exec();
     res.status(200).send(data);
   } catch (err) {
     res.status(404).send(err);
   }
 });
 
-app.get('/toKnow/:name', async (req, res) => {
+app.get('/toKnow/:id', async (req, res) => {
   try {
-    const name = req.params.name.replace(/-/g, ' ');
-    const data = await ToKnow.findOne({ name }).exec();
+    const data = await ToKnow.findOne({ id: req.params.id }).exec();
     res.status(200).send(data);
   } catch (err) {
     res.status(404).send(err);

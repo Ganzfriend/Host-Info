@@ -20,8 +20,7 @@ afterAll(async (done) => {
 
 describe('server endpoints', () => {
   req = (endpoint) => request.get(endpoint);
-  const name = 'Jon Lasley';
-  const endpoint = name.replace(/\s/g, '-');
+  const endpoint = 15;
 
   describe('GET requests', () => {
     test('should return an OK status code with proper endpoint', async (done) => {
@@ -41,12 +40,12 @@ describe('server endpoints', () => {
     test('should return specific data', async (done) => {
       const res = await req(`/hostInfo/${endpoint}`);
       expect(res.body).not.toBeNull();
-      expect(res.body.name).toBe(name);
+      expect(res.body.name).toBe('Jon Lasley');
       done();
     });
 
     test('should return nested properties', async (done) => {
-      const res = await req('/toKnow/Model-H-is-for-house');
+      const res = await req(`/toKnow/${endpoint}`);
       expect(res.body).not.toBeNull();
       expect(res.body).toHaveProperty('health');
       expect(res.body.health).toHaveProperty('safety');
@@ -54,14 +53,14 @@ describe('server endpoints', () => {
     });
 
     test('should check for a user with no messages', async (done) => {
-      const res = await req('/hostInfo/Elon-Musk');
+      const res = await req(`/hostInfo/${endpoint}`);
       expect(res.body).toHaveProperty('messages');
       expect(res.body.messages).toHaveLength(0);
       done();
     });
 
     it('should return the location requested', async (done) => {
-      const res = await req('/location/Austin');
+      const res = await req(`/location/${endpoint}`);
       expect(res.status).toBe(200);
       const { city, state, country } = res.body;
       const location = `${city}, ${state}, ${country}`;

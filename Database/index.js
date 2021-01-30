@@ -14,6 +14,7 @@ const locationSchema = new mongoose.Schema({
   state: String,
   country: String,
   desc: String,
+  properties: [Number],
 });
 
 const hostSchema = new mongoose.Schema({
@@ -46,6 +47,7 @@ const toKnowSchema = new mongoose.Schema({
     acknowledge: [String],
   },
   cancelPolicy: [String],
+  id: Number,
 });
 
 module.exports.Hosts = mongoose.model('host', hostSchema);
