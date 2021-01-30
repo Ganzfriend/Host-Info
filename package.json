@@ -4,9 +4,10 @@
   "description": "Host Info and Location module",
   "main": "server.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --collectCoverage",
+    "test": "jest --detectOpenHandles --collectCoverage Test/server.test.js",
     "start": "nodemon Server/index.js",
     "watch": "webpack --mode development -w",
+    "production": "webpack --mode production",
     "seed": "node Database/seed.js",
     "lint": "node_modules/.bin/eslint . --ignore-path .eslintignore"
   },
@@ -37,7 +38,8 @@
     "mongoose": "^5.11.11",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.3",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",

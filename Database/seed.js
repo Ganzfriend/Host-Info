@@ -18,7 +18,7 @@ const hosts = [
       rate: 100,
       time: 'within an hour',
     },
-    properties: ['Hollywood lifeStyle of luxury! Manion for a star', 'Jabroni, it\'s the Rock cave', 'Cabin near seattle, the getaway you need!'],
+    properties: [18, 1, 2],
     messages: [],
   },
   {
@@ -36,7 +36,7 @@ const hosts = [
       rate: 98,
       time: 'within a few hours',
     },
-    properties: ['Model H is for house', 'Giga Mansion of West Hollywood', 'First house on Mars - Pre-book now!!!', 'Best Crash pad for Oaklands finests'],
+    properties: [19, 3, 4],
     messages: [],
   },
   {
@@ -54,7 +54,7 @@ const hosts = [
       rate: 83,
       time: 'within a day',
     },
-    properties: ['Bay for days! The best view in the Bay'],
+    properties: [20],
     messages: [],
   },
   {
@@ -72,7 +72,7 @@ const hosts = [
       rate: 88,
       time: 'within a day',
     },
-    properties: ['The only apartment in Seattles Needle. Don\'t ask.', 'We go to WeHo', 'We go to WeHo too'],
+    properties: [5, 6, 7],
     messages: [],
   },
   {
@@ -90,7 +90,7 @@ const hosts = [
       rate: 95,
       time: 'within a few hours',
     },
-    properties: ['Bay bay for the bay', 'Sweet cozy home, heart of Austin', 'Live like a king in this king sized apartment. Oakland\'s penthouse', 'Walk to the bars, stay away from cars. 6th Street\'s popping household'],
+    properties: [14, 15, 16, 17],
     messages: [],
   },
   {
@@ -108,7 +108,7 @@ const hosts = [
       rate: 93,
       time: 'within a day',
     },
-    properties: ['Oakland\'s only skyrise mansion', 'Cute and quant cottage on outskirts of Austin ', 'Delivered Austin BBQ is still the best BBQ in Austin'],
+    properties: [11, 12, 13],
     messages: [],
   },
   {
@@ -126,7 +126,7 @@ const hosts = [
       rate: 97,
       time: 'within a few hours',
     },
-    properties: ['Seattles true finest', 'Across from the needle. Best view in Seattle', 'When you\'re here, you\'re here.'],
+    properties: [8, 9, 10],
     messages: [],
   },
 ];
@@ -137,28 +137,32 @@ const locations = [
     state: 'California',
     country: 'United States',
     desc: 'Hollywood is a trendy area known for its high-energy nightlife. The fabled Sunset Strip features the Chateau Marmont, a swanky celebrity hideaway, plus comedy clubs and live music venues like the legendary Whiskey a Go Go. Santa Monica Boulevard, awash in rainbow flags, is home to a number of gay bars, dance clubs and shops. Hollywood also offers some of the city’s most buzzworthy restaurants.\n\nWeHo: Located in the heart of metropolitan Los Angeles, at 1.9 square miles, West Hollywood is a robust economic and cultural center instilled with idealism and creativity. The City of West Hollywood is filled with rich history. People from all over the globe visit West Hollywood for its iconic destinations such as The Sunset Strip for its unparalleled historical connection to music, entertainment, architecture, fashion, and culture-making; for Santa Monica Boulevard’s historic LGBT destinations and entertainment establishments; and for the Design District’s shopping, galleries, and restaurants.',
+    properties: [1, 3, 6, 7, 18],
   },
   {
     city: 'Austin',
     state: 'Texas',
     country: 'United States',
     desc: 'As Austin grows into a world-class city, there\'s concern in some quarters that it\'s losing its weirdness. But rest assured that Austin retains it\'s many attractive features.\n\nOverall, what attracts many people to Austin are likely the same things that caught your attention; the high quality of life, low cost of living, favorable employment prospects, relatively mild climate, and active music and arts scene.\n\nNeighboorhoods: Downtown is the heart of the city, where it\'s non-stop activity day and night.\n\nCultural attractions fill visitors\' days, and nightlife, shows and concerts keep them busy all night. \n\nThe main district contains within its borders smaller neighborhoods for shopping, nightlife, eateries and galleries.',
+    properties: [17, 12, 13, 15, 19],
   },
   {
     city: 'Oakland',
     state: 'California',
     country: 'United States',
     desc: 'Hipsters and hip hop, passionate activists and grassroots entrepreneurs—it takes time to peel back all of the layers that make up the city. To truly appreciate Oakland’s diverse culture, spend some time exploring its neighborhoods. You’ll find prideful locals around every corner, whether it’s at the farmers market in Chinatown or a theater in Uptown. Don’t settle in one spot for too long—there’s a lot of ground to cover in Oakland. Read on for your cheat sheet to The Town’s best.\n\nOld Oakland: Though there are Victorians sprinkled throughout Oakland, this slice of preserved late century architecture is brochure-perfect. Many of the buildings within this six-block stretch look fresh off an 1870s remodel. Back in the day, this was the place to be seen in Oakland, the center of hoighty-toighty society, having the best restaurants, shops and hotels on cobble-stoned streets. And it still is—although it took a serious amount of restoring to bring it back from neglect after the 1906 earthquake. Today, indie retail shops are opening. Chefs at informal eateries are cooking up recipes from their old countries, whether that be Mexico, Barbados, Italy or Vietnam. At the old Swan’s Market, a food hall is coming to life with Mexican Cosecha, wine tasting with Periscope Cellars, and Rosamunde’s sausage and beer. The Friday’s farmers market is one of The Town’s best, with all the local characters buying their delicious provisions.',
+    properties: [4, 11, 16, 14, 20],
   },
   {
     city: 'Seattle',
     state: 'Washington',
     country: 'United States',
     desc: 'Seattle is a city of distinct neighbourhoods and urban districts that, though close to one another, change from one street to the next. Some neighbourhoods, notably those near the Duwamish Waterway to southwest of the city centre, are industrial in character, marked by rail yards, wharves, cranes, and low-income housing projects. Others, largely outside the city centre, are showcases for the opulence wrought by Seattle’s booming high-technology sector.\n\nThe downtown district is Seattle’s commercial heart. Of particular interest to visitors is the Pike Place Market, a sheltered area of fresh fish and produce shops, other retail stores, and restaurants. To the east and northeast of the downtown district stand First Hill and Capitol Hill, low bluffs covered by office buildings and commercial properties. Capitol Hill has many stately mansions and is a lively centre for shopping and nightlife. Beyond them are the Central District, the traditional hub of the city’s African American population, and the large residential Madrona neighbourhood, which faces Lake Washington.\n\nTo the north of Pioneer Square, downtown, and the popular neighbourhood of Belltown stands Seattle Center, the 74-acre (30-hectare) site of the 1962 World’s Fair. The centre contains the 605-foot- (184-metre-) high Space Needle, Seattle’s best-known landmark, as well as McCaw Hall (home of the Seattle Opera), Key Arena, the Children’s Museum, the Museum of Pop Culture, and other public buildings. There the high-rise downtown cityscape gives way to the pleasant urban neighbourhoods of Magnolia, which borders Puget Sound, and Queen Anne, located east-southeast of Magnolia between Lake Union, the Lake Washington Ship Canal, and Elliott Bay. South Lake Union was a relatively sleepy area until Amazon.com consolidated all of its offices there in 2010, which led to rapid growth that was partially enabled by a streetcar line that had opened in the neighbourhood in 2007.',
+    properties: [2, 5, 8, 9, 10],
   },
 ];
 
-const otherToKnows = ['Jabroni, it\'s the Rock cave', 'Cabin near seattle, the getaway you need!', 'Giga Mansion of West Hollywood', 'First house on Mars - Pre-book now!!!', 'Best Crash pad for Oaklands finests', 'The only apartment in Seattles Needle. Don\'t ask.', 'We go to WeHo', 'We go to WeHo too', 'Seattles true finest', 'Across from the needle. Best view in Seattle', 'When you\'re here, you\'re here.', 'Oakland\'s only skyrise mansion', 'Cute and quant cottage on outskirts of Austin ', 'Delivered Austin BBQ is still the best BBQ in Austin', 'Bay bay for the bay', 'Sweet cozy home, heart of Austin', 'Live like a king in this king sized apartment. Oakland\'s penthouse', 'Walk to the bars, stay away from cars. 6th Street\'s popping household']
+const otherToKnows = ['Jabroni, it\'s the Rock cave', 'Cabin near seattle, the getaway you need!', 'Giga Mansion of West Hollywood', 'Best Crash pad for Oaklands finests', 'The only apartment in Seattles Needle, Don\'t ask', 'We go to WeHo', 'We go to WeHo too', 'Seattles true finest', 'Across from the needle, Best view in Seattle', 'When you\'re here, you\'re here', 'Oakland\'s only skyrise mansion', 'Cute and quant cottage on outskirts of Austin', 'Delivered Austin BBQ is still the best BBQ in Austin', 'Bay bay for the bay', 'Sweet cozy home, heart of Austin', 'Live like a king in this king sized apartment, Oakland\'s penthouse', 'Walk to the bars, stay away from cars, 6th Street\'s popping household']
   .reduce((m, i) => {
     m.push({
       name: i,
@@ -171,6 +175,7 @@ const otherToKnows = ['Jabroni, it\'s the Rock cave', 'Cabin near seattle, the g
         acknowledge: ['Security Deposit - if you damage the home, you may be charged up to $500'],
       },
       cancelPolicy: ['Free cancellation for 48hrs', 'After that, cancel before 4:00pm on Feb 12 to get 50% back, minus the service fee'],
+      id: m.length + 1,
     });
     return m;
   }, []);
@@ -187,6 +192,7 @@ const toKnow = [
       acknowledge: ['Must climb stairs - There are 5 stories. The elevator is broken, so you must climb stairs to access bedrooms, kitchen, and basketball court.', 'Security Deposit - if you damage the home, you may be charged up to $500'],
     },
     cancelPolicy: ['Free cancellation for 48hrs', 'After that, cancel before 4:00pm on Feb 12 to get 50% back, minus the first night and service fee'],
+    id: 18,
   },
   {
     name: 'Model H is for house',
@@ -199,6 +205,7 @@ const toKnow = [
       acknowledge: ['No Jeff Bezos - Do not allow Jeff Bezos on to the property', 'Security Deposit - if you damage the home, you may be charged to throw an epic party on my birthday'],
     },
     cancelPolicy: ['Free cancellation for 12hrs', 'After that, cancel before 12:00pm on Apr 3 to get 30% back, minus the service fee'],
+    id: 19,
   },
   {
     name: 'Bay for days! The best view in the Bay',
@@ -211,6 +218,7 @@ const toKnow = [
       acknowledge: ['Security Deposit - if you damage the home, you may be charged up to $125'],
     },
     cancelPolicy: ['Free cancellation from 1 week of booking', 'After that, cancel before 4:00pm on Feb 27 to get 50% back, minus the service fee'],
+    id: 20,
   },
   ...otherToKnows,
 ];
