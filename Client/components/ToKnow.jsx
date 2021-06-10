@@ -8,15 +8,15 @@ import Rules from './Rules.jsx';
 import ToKnowModal from './ToKnowModal.jsx';
 
 const ToKnow = () => {
-  const [showRules, setRules] = useState(false);
-  const [showSafety, setSafety] = useState(false);
-  const [showCancel, setCancel] = useState(false);
+  const [showRules, setShowRules] = useState(false);
+  const [showSafety, setShowSafety] = useState(false);
+  const [showCancel, setShowCancel] = useState(false);
 
   const [toKnow, setToKnow] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://3.101.149.145:3001/toKnow/${id}`)
+    axios.get(`/toKnow/${id}`)
       .then(({ data }) => {
         setToKnow(data);
       })
@@ -24,7 +24,7 @@ const ToKnow = () => {
   });
 
   const { rules, health, cancelPolicy } = toKnow;
-  const healthTitle = 'Health & safety';
+  const healthTitle = 'Health & Safety';
 
   const openModal = (e, cb) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const ToKnow = () => {
           <div>
             <div className='Know-subtitle'>House rules</div>
             <Rules rules={rules.house} />
-            <a href='#' onClick={(e) => openModal(e, setRules)}>
+            <a href='#' className="a-loc" onClick={(e) => openModal(e, setShowRules)}>
               Show more
               <ChevronRightIcon />
             </a>
@@ -49,7 +49,7 @@ const ToKnow = () => {
           <div>
             <div className='Know-subtitle'>{healthTitle}</div>
             <Health health={health.safety} />
-            <a href='#' onClick={(e) => openModal(e, setSafety)}>
+            <a href='#' className="a-loc" onClick={(e) => openModal(e, setShowSafety)}>
               Show more
               <ChevronRightIcon />
             </a>
@@ -57,7 +57,7 @@ const ToKnow = () => {
           <div>
             <div className='Know-subtitle'>Cancellation policy</div>
             {cancelPolicy.map((line) => <div className='rule' key={line}>{line}</div>)}
-            <a href='#' onClick={(e) => openModal(e, setCancel)}>
+            <a href='#' className="a-loc" onClick={(e) => openModal(e, setShowCancel)}>
               More details
               <ChevronRightIcon />
             </a>
@@ -65,9 +65,21 @@ const ToKnow = () => {
         </div>
         <br />
         <hr />
-        <ToKnowModal whatToKnow={rules} show={showRules} close={() => setRules(false)} />
-        <ToKnowModal whatToKnow={health} show={showSafety} close={() => setSafety(false)} />
-        <ToKnowModal whatToKnow={cancelPolicy} show={showCancel} close={() => setCancel(false)} />
+        <ToKnowModal
+          whatToKnow={rules}
+          show={showRules}
+          close={() => setShowRules(false)}
+        />
+        <ToKnowModal
+          whatToKnow={health}
+          show={showSafety}
+          close={() => setShowSafety(false)}
+        />
+        <ToKnowModal
+          whatToKnow={cancelPolicy}
+          show={showCancel}
+          close={() => setShowCancel(false)}
+        />
       </div>
     );
 };

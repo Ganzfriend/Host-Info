@@ -5,12 +5,12 @@ import { Modal } from 'react-bootstrap';
 import initMap from '../gMap.js';
 
 const Location = () => {
-  const [isShown, setModule] = useState(false);
+  const [isShown, setIsShown] = useState(false);
   const [location, setLocation] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://3.101.149.145:3001/location/${id}`)
+    axios.get(`/location/${id}`)
       .then(({ data }) => {
         setLocation(data);
       })
@@ -61,18 +61,30 @@ const Location = () => {
       </div>
       )}
       <br />
-      <button id='open-loc-modal' type='button' onClick={() => setModule(true)}>More about the location</button>
+      <button
+        id='open-loc-modal'
+        type='button'
+        onClick={() => setIsShown(true)}
+      >
+        More about the location
+      </button>
       <hr />
       <Modal
         show={isShown}
-        onHide={() => setModule(false)}
+        onHide={() => setIsShown(false)}
         centered
         animation
         dialogClassName='loc-modal'
       >
         <Modal.Body>
           <div id='loc-overlay'>
-            <button id='close-loc-modal' type='button' onClick={() => setModule(false)}>{'<'}</button>
+            <button
+              id='close-loc-modal'
+              type='button'
+              onClick={() => setIsShown(false)}
+            >
+              {'<'}
+            </button>
             <div id='loc-info'>
               <div>
                 <h1>Location</h1>

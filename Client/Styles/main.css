@@ -193,14 +193,14 @@ button:hover {
   margin-right: 50px;
 }
 
-a {
+.loc-a {
   font-family: 'Airbnb cereal App Medium';
   font-size: 16px;
   color: black;
   text-decoration: underline;
 }
 
-#host-desc a:hover {
+#host-desc .loc-a:hover {
   cursor: pointer;
   color: black;
 }

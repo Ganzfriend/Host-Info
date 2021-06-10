@@ -10,19 +10,24 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 const HostInfo = () => {
-  const [showMore, setShow] = useState(false);
-  const [showModal, setModal] = useState(false);
-  const [msgName, setName] = useState('');
-  const [msgEmail, setEmail] = useState('');
-  const [msgTopic, setTopic] = useState('');
-  const [msgBody, setBody] = useState('');
+  const [showMore, setShowMore] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [msgName, setMsgName] = useState('');
+  const [msgEmail, setMsgEmail] = useState('');
+  const [msgTopic, setMsgTopic] = useState('');
+  const [msgBody, setMsgBody] = useState('');
   const [valid, setValid] = useState('');
 
   const [host, setHost] = useState({});
   const { id } = useParams();
+  const { Group, Label, Control } = Form;
+  const { Feedback } = Control;
+  const {
+    Header, Body, Title, Footer,
+  } = Modal;
 
   useEffect(() => {
-    axios.get(`http://3.101.149.145:3001/hostInfo/${id}`)
+    axios.get(`/hostInfo/${id}`)
       .then(({ data }) => {
         setHost(data);
       })
@@ -35,15 +40,15 @@ const HostInfo = () => {
 
   const toggleDesc = (e) => {
     e.preventDefault();
-    setShow(true);
+    setShowMore(true);
   };
 
   const resetState = () => {
-    setName('');
-    setEmail('');
-    setTopic('');
-    setBody('');
-    setModal(false);
+    setMsgName('');
+    setMsgEmail('');
+    setMsgTopic('');
+    setMsgBody('');
+    setShowModal(false);
     setValid(false);
   };
 
@@ -60,7 +65,7 @@ const HostInfo = () => {
         topic: msgTopic,
         message: msgBody,
       };
-      axios.put(`http://3.101.149.145:3001/email/${_id}`, body)
+      axios.put(`/email/${_id}`, body)
         .then((res) => {
           console.log(res);
           resetState();
@@ -96,7 +101,7 @@ const HostInfo = () => {
               </div>
               {verified ? <VerifiedUserIcon style={{ color: 'red' }} /> : <ReportProblemIcon style={{ color: 'red' }} />}
               <div id='verified'>
-                {verified ? 'Identity Verified' : 'Not verified'}
+                {verified ? 'Identity Verified' : 'Not Verified'}
               </div>
             </div>
             <br />
@@ -104,7 +109,7 @@ const HostInfo = () => {
               {showMore && desc}
               {!showMore && desc.split(' ').slice(0, 25).join(' ')}
               {!showMore && '...  '}
-              {!showMore && <a href='#' onClick={toggleDesc}>read more</a>}
+              {!showMore && <a className="a-loc" href='#' onClick={toggleDesc}>read more</a>}
             </div>
           </div>
           <div id='host-contact'>
@@ -116,12 +121,12 @@ const HostInfo = () => {
               {`Response time: ${response.time}`}
             </div>
             <br />
-            <button type='button' onClick={() => setModal(true)}>Contact host</button>
+            <button type='button' onClick={() => setShowModal(true)}>Contact host</button>
             <div>
               <SecurityIcon style={{ color: 'blue', display: 'inline-block' }} />
               <div id='prot-warning'>
                 To protect your payment, never transfer
-                money or communicate outside of the Airbnb
+                money or communicate outside of the Destination Capstone
                 website or app.
               </div>
             </div>
@@ -132,64 +137,80 @@ const HostInfo = () => {
             centered
             animation
           >
-            <Modal.Header true>
-              <Modal.Title>{`Contact ${name.split(' ')[0]}!`}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <Header true>
+              <Title>{`Contact ${name.split(' ')[0]}!`}</Title>
+            </Header>
+            <Body>
               <Form noValidate validated={valid} onSubmit={submitMessage}>
-                <Form.Group controlId="validationCustom01">
-                  <Form.Label>Name: </Form.Label>
-                  <Form.Control type="text" placeholder="Enter name" onChange={(e) => setName(e.target.value)} required />
-                  <Form.Control.Feedback type='invalid'>
+                <Group controlId="validationCustom01">
+                  <Label>Name: </Label>
+                  <Control
+                    type="text"
+                    placeholder="Enter name"
+                    onChange={(e) => setMsgName(e.target.value)}
+                    required
+                  />
+                  <Feedback type='invalid'>
                     Please provide your name
-                  </Form.Control.Feedback>
-                  <Form.Control.Feedback type="valid">
+                  </Feedback>
+                  <Feedback type="valid">
                     Looks good!
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="validationCustom01">
-                  <Form.Label>Email: </Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" required onChange={(e) => setEmail(e.target.value)} />
-                  <Form.Control.Feedback type="invalid">
+                  </Feedback>
+                </Group>
+                <Group controlId="validationCustom01">
+                  <Label>Email: </Label>
+                  <Control
+                    type="email"
+                    placeholder="Enter email"
+                    required
+                    onChange={(e) => setMsgEmail(e.target.value)}
+                  />
+                  <Feedback type="invalid">
                     Please provide a valid email.
-                  </Form.Control.Feedback>
-                  <Form.Control.Feedback type="valid">
+                  </Feedback>
+                  <Feedback type="valid">
                     Looks good!
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Topic: </Form.Label>
-                  <Form.Control as="select" required onChange={(e) => setTopic(e.target.value)}>
+                  </Feedback>
+                </Group>
+                <Group>
+                  <Label>Topic: </Label>
+                  <Control as="select" required onChange={(e) => setMsgTopic(e.target.value)}>
                     <option hidden>{' '}</option>
                     <option>Getting there</option>
                     <option>House details and rules</option>
                     <option>Availability</option>
                     <option>Refund policy</option>
                     <option>Other</option>
-                  </Form.Control>
-                  <Form.Control.Feedback type="invalid">
+                  </Control>
+                  <Feedback type="invalid">
                     Please provide a topic for the message
-                  </Form.Control.Feedback>
-                  <Form.Control.Feedback type="valid">
+                  </Feedback>
+                  <Feedback type="valid">
                     Looks good!
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="validationCustom01">
-                  <Form.Label>Message: </Form.Label>
-                  <Form.Control as="textarea" rows={4} placeholder="Message here" required onChange={(e) => setBody(e.target.value)} />
-                  <Form.Control.Feedback type="invalid">
+                  </Feedback>
+                </Group>
+                <Group controlId="validationCustom01">
+                  <Label>Message: </Label>
+                  <Control
+                    as="textarea"
+                    rows={4}
+                    placeholder="Message here"
+                    required
+                    onChange={(e) => setMsgBody(e.target.value)}
+                  />
+                  <Feedback type="invalid">
                     Please provide a message
-                  </Form.Control.Feedback>
-                  <Form.Control.Feedback type="valid">
+                  </Feedback>
+                  <Feedback type="valid">
                     Looks good!
-                  </Form.Control.Feedback>
-                </Form.Group>
+                  </Feedback>
+                </Group>
                 <Button type='submit'>Send message</Button>
               </Form>
-            </Modal.Body>
-            <Modal.Footer>
+            </Body>
+            <Footer>
               <Button variant='secondary' onClick={resetState}>Close</Button>
-            </Modal.Footer>
+            </Footer>
           </Modal>
         </div>
         <hr />

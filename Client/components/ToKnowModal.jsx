@@ -9,9 +9,10 @@ const ToKnowModal = ({ whatToKnow, show, close }) => {
   let subTitle = 'Additional rules';
   let mainShow = <Rules rules={whatToKnow.house} />;
   let subShow = <Rules rules={whatToKnow.additional} />;
+  const { Body, Title } = Modal;
 
   if (whatToKnow.safety) {
-    title = 'Health & safety';
+    title = 'Health & Safety';
     subTitle = 'You must also acknowledge';
     mainShow = <Health health={whatToKnow.safety} />;
     subShow = <Health health={whatToKnow.acknowledge} />;
@@ -35,14 +36,14 @@ const ToKnowModal = ({ whatToKnow, show, close }) => {
           <CloseIcon fontSize='small' />
         </button>
       </div>
-      <Modal.Body>
-        <Modal.Title>{title}</Modal.Title>
+      <Body>
+        <Title>{title}</Title>
         {mainShow}
         <div id='modal-subtitle'>
           {subTitle}
         </div>
         {subShow}
-      </Modal.Body>
+      </Body>
     </Modal>
   );
 };
