@@ -227,7 +227,8 @@ const seedDB = () => {
   Hosts.create(hosts)
     .then(() => Locations.create(locations))
     .then(() => ToKnow.create(toKnow))
-    .then(db.disconnect);
+    .then(db.disconnect)
+    .catch((err) => console.log(err));
 };
 
 seedDB();
