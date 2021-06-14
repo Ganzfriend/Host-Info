@@ -5,7 +5,7 @@ const OUT_DIR = path.join(__dirname, '/Public');
 module.exports = {
   entry: SRC_DIR,
   output: {
-    filename: 'bundle.js',
+    filename: 'host-info-bundle.js',
     path: OUT_DIR
   },
   module: {

@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'Public')));
 
 app.get('/static', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Public', 'bundle.js'));
+  res.sendFile(path.join(__dirname, 'Public', 'host-info-bundle.js'));
 });
 
 app.get('/hostInfo/:id', async (req, res) => {

@@ -1,3 +1,4 @@
 node_modules
 Coverage
 .env
+host-info-bundle.js
